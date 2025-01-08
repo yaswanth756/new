@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeTrack Pro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-1">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                CodeTrack Pro
+            </div>
+            <div class="streak-navbar">
+                <div class="streak-display-nav">
+                    <i class="fas fa-fire"></i>
+                    <div>
+                        <span class="streak-number-nav" id="streakCountNav"></span>
+                        <span class="streak-label-nav">Days You worked</span>
+                    </div>
+                </div>
+                <div class="controls-nav">
+                    <button class="btn-nav" id="decrementBtnNav" disabled>-</button>
+                    <button class="btn-nav" id="incrementBtnNav">+</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <header class="header">
+            <h1 id="pro">My Progress Dashboard</h1>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="toggleModal('addTopicModal')">
+                    <i class="fas fa-folder-plus"></i>
+                    New Topic
+                </button>
+            </div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <i class="fas fa-book"></i>
+                    <h3>Active Topics</h3>
+                </div>
+                <div class="stat-value">
+                    <div class="loading-spinner-1" id="loadingSpinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Problems Solved</h3>
+                </div>
+                <div class="stat-value">
+                    <div class="loading-spinner-1" id="loadingSpinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3></h3>
+                </div>
+                <div class="stat-value">
+                    <div class="loading-spinner-1" id="loadingSpinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="topics">
+            <div class="topics-header">
+                <h2>Current Topics</h2>
+            </div>
+            
+            <div class="topic-cards" id="topicCards">
+                <div class="topic-card">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </div>
+    <section class="dsa-concepts">
+        
+
+        <!-- Data Structures Section -->
+        <div class="concepts-section">
+            <h3>Data Structures</h3>
+            <div class="concepts-grid" id="dataStructuresGrid">
+                <!-- Data Structures will be added here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Algorithms Section -->
+        <div class="concepts-section">
+            <h3>Algorithms--Imp</h3>
+            <div class="concepts-grid" id="algorithmsGrid">
+                <!-- Algorithms will be added here by JavaScript -->
+            </div>
+        </div>
+    </section>
+    <!-- Add Topic Modal -->
+    <div id="addTopicModal" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 2rem;">Add New Topic</h2>
+        <form id="addTopicForm">
+            <div class="form-group">
+                <label class="form-label">Topic Name</label>
+                <select class="form-select" name="topicName" required>
+                    <option value="">Select a topic</option>
+                    <option value="Arrays & Strings">Arrays & Strings</option>
+                    <option value="Linked Lists">Linked Lists</option>
+                    <option value="Stacks">Stacks</option>
+                    <option value="Queues">Queues</option>
+                    <option value="Trees">Trees</option>
+                    <option value="Graphs">Graphs</option>
+                    <option value="Hash Tables">Hash Tables</option>
+                    <option value="Heaps">Heaps</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Target Problems</label>
+                <select class="form-select" name="targetProblems" required>
+                    <option value="">Select target problems</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                    <option value="70">70</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Target Completion Date</label>
+                <input type="date" class="form-input" name="targetDate" required>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary">Add Topic</button>
+                <button type="button" class="btn" onclick="toggleModal('addTopicModal')">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <!-- Update Progress Modal -->
+    <div id="updateProgressModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 2rem;">Update Progress</h2>
+            <form id="updateProgressForm">
+                <div class="form-group">
+                    <label class="form-label">Problems Solved</label>
+                    <div style="background: #f9fafb; padding: 1rem; border-radius: 8px;">
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="flex: 1;">Easy Problems:</span>
+                                <input type="number" name="easySolved" 
+                                       class="form-input problem-input" 
+                                       style="width: 100px;" 
+                                       min="0" 
+                                       value="0">
+                            </label>
+                        </div>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="flex: 1;">Medium Problems:</span>
+                                <input type="number" name="mediumSolved" 
+                                       class="form-input problem-input" 
+                                       style="width: 100px;" 
+                                       min="0" 
+                                       value="0">
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="flex: 1;">Hard Problems:</span>
+                                <input type="number" name="hardSolved" 
+                                       class="form-input problem-input" 
+                                       style="width: 100px;" 
+                                       min="0" 
+                                       value="0">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <div id="updateSummary" style="background: #f0f9ff; padding: 1rem; border-radius: 8px; display: none;">
+                        <h4 style="margin-bottom: 0.5rem;">Summary</h4>
+                        <p id="totalProblems">Total problems to add: 0</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-primary">Update Progress</button>
+                    <button type="button" class="btn" onclick="remove()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="background-light" class="overlay">
+        <div class="login-container" id="loginContainer">
+            <div class="logo">Hey ! Fast Login in 10 seconds </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div id="correct"></div>
+                <div class="log">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+   <script src="index.js"></script>
+</body>
+</html>
